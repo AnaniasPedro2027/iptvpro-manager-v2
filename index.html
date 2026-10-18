@@ -3,134 +3,249 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>IPTVPro Manager</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#0b1120;color:#f1f5f9}
-header{background:#111c31;padding:20px;border-bottom:1px solid #263449}
+body{margin:0;background:#0b1120;color:#e5edf8;font-family:Arial,sans-serif}
+header{padding:20px;background:#111c31;border-bottom:1px solid #263449}
 header h1{margin:0;color:#38bdf8;font-size:24px}
-header p{margin:7px 0 0;color:#94a3b8}
-main{padding:18px;max-width:1000px;margin:auto}
-h2{font-size:21px}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{background:#152238;border:1px solid #263449;border-radius:12px;padding:16px}
-.card p{color:#94a3b8;margin:0 0 10px;font-size:13px}
-.card strong{font-size:23px;color:#38bdf8}
-section{margin-top:24px}
-label{display:block;margin:12px 0 6px;color:#cbd5e1}
-input,select{width:100%;padding:12px;border-radius:8px;border:1px solid #334155;background:#0b1120;color:white;font-size:16px}
-button{background:#0284c7;color:white;border:0;border-radius:8px;padding:12px 16px;font-weight:bold;margin-top:14px;cursor:pointer}
-.plan{margin:10px 0;padding:14px;background:#152238;border-radius:9px}
-.small{color:#94a3b8;font-size:13px}
-#mensagem{color:#4ade80}
-ul{padding-left:20px}
-li{margin:10px 0;overflow-wrap:anywhere}
-footer{text-align:center;padding:25px;color:#64748b;font-size:12px}
+header p,.muted{color:#94a3b8;font-size:13px}
+main{max-width:1100px;margin:auto;padding:16px}
+h2{font-size:19px;margin-top:25px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.card,.panel{background:#152238;border:1px solid #263449;border-radius:12px;padding:15px}
+.card p{font-size:12px;color:#94a3b8}
+.card strong{font-size:25px;color:#38bdf8}
+input,select{width:100%;padding:12px;margin:5px 0 12px;background:#0b1120;border:1px solid #334155;border-radius:8px;color:white;font-size:15px}
+label{font-size:13px;color:#cbd5e1}
+button{padding:10px 12px;border:0;border-radius:7px;background:#0284c7;color:white;font-weight:bold;cursor:pointer;margin:3px 3px 3px 0}
+button.secondary{background:#334155}
+button.danger{background:#991b1b}
+button.good{background:#15803d}
+button:disabled{opacity:.5}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row>*{flex:1;min-width:120px}
+.plan{padding:13px;margin:8px 0;background:#111c31;border-radius:8px}
+.client{padding:14px 0;border-bottom:1px solid #334155;overflow-wrap:anywhere}
+.client h3{margin:0 0 8px;font-size:16px}
+.tag{display:inline-block;background:#334155;padding:4px 7px;border-radius:5px;font-size:12px;margin:3px 3px 3px 0}
+.green{color:#4ade80}.yellow{color:#facc15}.red{color:#f87171}
+#message{color:#4ade80;min-height:20px}
+footer{text-align:center;color:#64748b;padding:25px;font-size:12px}
 </style>
 </head>
 <body>
 <header>
 <h1>IPTVPro Manager</h1>
-<p>Faz Tudo em Angola · Painel de gestão</p>
+<p>Faz Tudo em Angola · Gestão de serviços e clientes</p>
 </header>
 <main>
-<h2>Visão geral</h2>
+<h2>Resumo do negócio</h2>
 <div class="cards">
-<div class="card"><p>Total de clientes neste navegador</p><strong id="total">0</strong></div>
-<div class="card"><p>Subscrições activas</p><strong id="ativas">0</strong></div>
-<div class="card"><p>Planos disponíveis</p><strong>3</strong></div>
-<div class="card"><p>Moeda</p><strong>Kz</strong></div>
+<div class="card"><p>Total de clientes</p><strong id="total">0</strong></div>
+<div class="card"><p>Subscrições activas</p><strong id="active">0</strong></div>
+<div class="card"><p>Pagamentos pendentes</p><strong id="pending">0</strong></div>
+<div class="card"><p>Receitas registadas (Kz)</p><strong id="revenue">0</strong></div>
 </div>
 
-<section>
-<h2>Planos IPTV</h2>
+<h2>Planos e preços</h2>
 <div class="plan">Teste gratuito · 24 horas — <b>0 Kz</b></div>
 <div class="plan">Plano semanal — <b>2.500 Kz</b></div>
 <div class="plan">Plano mensal — <b>5.000 Kz</b></div>
-</section>
-
-<section>
-<h2>Registar cliente</h2>
-<p class="small">Demonstração local. Ainda não activa um serviço IPTV real.</p>
-<form id="formulario">
-<label for="nome">Nome do cliente</label>
-<input id="nome" required maxlength="100" placeholder="Nome completo">
-<label for="contacto">Contacto</label>
-<input id="contacto" required maxlength="40" placeholder="Telefone">
-<label for="plano">Plano pretendido</label>
-<select id="plano">
-<option value="Teste 24 horas">Teste gratuito — 24 horas</option>
-<option value="Semanal">Semanal — 2.500 Kz</option>
-<option value="Mensal">Mensal — 5.000 Kz</option>
-</select>
-<button type="submit">Registar cliente</button>
-</form>
-<p id="mensagem" role="status"></p>
-</section>
-
-<section>
-<h2>Lista de clientes</h2>
-<ul id="clientes"><li class="small">Ainda não existem clientes registados.</li></ul>
-<button id="limpar" type="button">Apagar dados locais</button>
-</section>
-
-<section>
-<h2>Outros serviços</h2>
 <div class="plan">Montagem de antena parabólica — <b>15.000 Kz</b></div>
-<div class="plan">Avisos aos clientes e reclamações — em preparação</div>
+
+<section class="panel">
+<h2>Registar cliente</h2>
+<p class="muted">Os registos ficam guardados neste navegador. Não activam automaticamente um serviço IPTV.</p>
+<form id="form">
+<label for="name">Nome do cliente</label>
+<input id="name" maxlength="100" required placeholder="Nome completo">
+<label for="phone">Contacto</label>
+<input id="phone" maxlength="40" required placeholder="Número de telefone">
+<label for="plan">Plano</label>
+<select id="plan">
+<option value="Teste 24 horas">Teste gratuito — 24 horas · 0 Kz</option>
+<option value="Semanal">Semanal · 2.500 Kz</option>
+<option value="Mensal">Mensal · 5.000 Kz</option>
+</select>
+<label for="payment">Estado do pagamento</label>
+<select id="payment">
+<option value="Pendente">Pendente</option>
+<option value="Pago">Pago</option>
+</select>
+<button type="submit">Guardar cliente</button>
+</form>
+<p id="message" role="status"></p>
+</section>
+
+<h2>Pesquisar e gerir clientes</h2>
+<input id="search" placeholder="Pesquisar por nome ou contacto">
+<div id="clients"></div>
+
+<section class="panel">
+<h2>Outros serviços</h2>
+<div class="plan">Avisos aos clientes — preparação futura</div>
+<div class="plan">Gestão de reclamações — preparação futura</div>
 <div class="plan">Leitor IPTV próprio — próxima fase</div>
+</section>
+
+<section class="panel">
+<h2>Dados deste navegador</h2>
+<p class="muted">Exporta uma cópia dos registos. O ficheiro pode conter dados pessoais: guarda-o num local seguro.</p>
+<button type="button" id="export">Exportar cópia JSON</button>
+<button type="button" class="danger" id="clear">Apagar todos os registos</button>
 </section>
 </main>
 <footer>IPTVPro Manager · Faz Tudo em Angola</footer>
+
 <script>
-const chave="iptvpro_demo_clientes_v1";
-let lista=[];
-try{lista=JSON.parse(localStorage.getItem(chave)||"[]");if(!Array.isArray(lista))lista=[];}catch(e){lista=[];}
-const total=document.getElementById("total");
-const ativas=document.getElementById("ativas");
-const clientes=document.getElementById("clientes");
-function mostrar(){
-total.textContent=lista.length;
-ativas.textContent="0";
-clientes.replaceChildren();
-if(!lista.length){
-const li=document.createElement("li");
-li.className="small";
-li.textContent="Ainda não existem clientes registados.";
-clientes.appendChild(li);
-return;
+const KEY="iptvpro_manager_v2";
+let records=[];
+try {
+ records=JSON.parse(localStorage.getItem(KEY)||"[]");
+ if(!Array.isArray(records)) records=[];
+} catch(e) { records=[]; }
+
+const $=id=>document.getElementById(id);
+const prices={"Teste 24 horas":0,"Semanal":2500,"Mensal":5000};
+const durations={"Teste 24 horas":1,"Semanal":7,"Mensal":30};
+
+function save(){
+ try {
+  localStorage.setItem(KEY,JSON.stringify(records));
+  return true;
+ } catch(e) {
+  $("message").textContent="Não foi possível guardar. Exporta os dados e verifica o espaço disponível.";
+  return false;
+ }
 }
-lista.forEach(c=>{
-const li=document.createElement("li");
-li.textContent=c.nome+" — "+c.contacto+" — "+c.plano+" — Pendente de activação";
-clientes.appendChild(li);
-});
+function expiry(r){
+ if(!r.activatedAt)return null;
+ return r.activatedAt+durations[r.plan]*86400000;
 }
-document.getElementById("formulario").addEventListener("submit",function(e){
-e.preventDefault();
-const cliente={
-nome:document.getElementById("nome").value.trim(),
-contacto:document.getElementById("contacto").value.trim(),
-plano:document.getElementById("plano").value
-};
-if(!cliente.nome||!cliente.contacto)return;
-lista.push(cliente);
-try{localStorage.setItem(chave,JSON.stringify(lista));}
-catch(err){lista.pop();document.getElementById("mensagem").textContent="Não foi possível guardar os dados.";return;}
-mostrar();
-this.reset();
-document.getElementById("mensagem").textContent="Cliente registado neste navegador.";
-});
-document.getElementById("limpar").addEventListener("click",function(){
-if(confirm("Tens a certeza de que queres apagar os dados locais?")){
-lista=[];
-localStorage.removeItem(chave);
-mostrar();
-document.getElementById("mensagem").textContent="Dados locais apagados.";
+function status(r){
+ if(!r.activatedAt)return "Pendente de activação";
+ return expiry(r)<=Date.now()?"Expirada":"Activa";
 }
+function date(ms){
+ return ms?new Date(ms).toLocaleDateString("pt-PT"):"Não definida";
+}
+function money(n){
+ return Number(n||0).toLocaleString("pt-PT")+" Kz";
+}
+function element(tag,cls,txt){
+ const el=document.createElement(tag);
+ if(cls)el.className=cls;
+ if(txt!==undefined)el.textContent=txt;
+ return el;
+}
+function button(txt,cls,fn){
+ const b=element("button",cls,txt);
+ b.type="button";b.addEventListener("click",fn);
+ return b;
+}
+function render(){
+ const active=records.filter(r=>status(r)==="Activa").length;
+ $("total").textContent=records.length;
+ $("active").textContent=active;
+ $("pending").textContent=records.filter(r=>r.payment!=="Pago").length;
+ $("revenue").textContent=money(records.filter(r=>r.payment==="Pago").reduce((s,r)=>s+r.price,0));
+
+ const q=$("search").value.trim().toLocaleLowerCase();
+ const root=$("clients");root.replaceChildren();
+ const found=records.filter(r=>(r.name+" "+r.phone).toLocaleLowerCase().includes(q));
+ if(!found.length){
+  root.appendChild(element("p","muted","Nenhum cliente encontrado."));
+  return;
+ }
+ found.slice().reverse().forEach(r=>{
+  const box=element("article","client");
+  box.appendChild(element("h3", "",r.name));
+  box.appendChild(element("div","muted","Contacto: "+r.phone));
+  box.appendChild(element("div","muted","Plano: "+r.plan+" · Valor: "+money(r.price)));
+  box.appendChild(element("div","muted","Registado: "+date(r.createdAt)));
+  box.appendChild(element("div","muted","Validade: "+date(expiry(r))));
+  const s=status(r);
+  box.appendChild(element("span","tag "+(s==="Activa"?"green":s==="Expirada"?"red":"yellow"),s));
+  box.appendChild(element("span","tag "+(r.payment==="Pago"?"green":"yellow"),"Pagamento: "+r.payment));
+  const actions=element("div","row");
+  if(r.payment!=="Pago"){
+   actions.appendChild(button("Marcar como pago","good",()=>{
+    if(confirm("Confirmas que recebeste o pagamento de "+money(r.price)+"?")){
+     r.payment="Pago";if(save())render();
+    }
+   }));
+  } else {
+   actions.appendChild(button("Marcar pendente","secondary",()=>{
+    if(confirm("Alterar o pagamento para pendente?")){
+     r.payment="Pendente";if(save())render();
+    }
+   }));
+  }
+  if(!r.activatedAt){
+   actions.appendChild(button("Activar manualmente","",()=>{
+    if(r.payment!=="Pago"&&r.price>0){
+     alert("Regista primeiro o pagamento como recebido.");
+     return;
+    }
+    if(confirm("Activar o período de "+r.plan+" a partir de agora?")){
+     r.activatedAt=Date.now();if(save())render();
+    }
+   }));
+  } else if(s==="Activa"){
+   actions.appendChild(button("Renovar plano","",()=>{
+    if(r.payment!=="Pago"&&r.price>0){
+     alert("Regista primeiro o pagamento como recebido.");
+     return;
+    }
+    if(confirm("Iniciar um novo período a partir de agora?")){
+     r.activatedAt=Date.now();if(save())render();
+    }
+   }));
+  }
+  actions.appendChild(button("Eliminar","danger",()=>{
+   if(confirm("Eliminar o registo de "+r.name+" deste navegador?")){
+    records=records.filter(x=>x.id!==r.id);
+    if(save())render();
+   }
+  }));
+  box.appendChild(actions);root.appendChild(box);
+ });
+}
+$("form").addEventListener("submit",e=>{
+ e.preventDefault();
+ const plan=$("plan").value;
+ const r={
+  id:Date.now().toString(36)+Math.random().toString(36).slice(2,8),
+  name:$("name").value.trim(),
+  phone:$("phone").value.trim(),
+  plan:plan,price:prices[plan],
+  payment:$("payment").value,
+  createdAt:Date.now(),activatedAt:null
+ };
+ if(!r.name||!r.phone)return;
+ records.push(r);
+ if(!save()){records.pop();return;}
+ $("form").reset();
+ $("message").textContent="Cliente guardado neste navegador.";
+ render();
 });
-mostrar();
+$("search").addEventListener("input",render);
+$("export").addEventListener("click",()=>{
+ const blob=new Blob([JSON.stringify(records,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;a.download="iptvpro-clientes.json";a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+$("clear").addEventListener("click",()=>{
+ if(confirm("Tens a certeza? Todos os registos locais serão apagados.")){
+  records=[];
+  if(save()){render();$("message").textContent="Registos apagados.";}
+ }
+});
+render();
 </script>
 </body>
 </html>
